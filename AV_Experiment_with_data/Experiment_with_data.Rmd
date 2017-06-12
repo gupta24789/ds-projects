@@ -1,0 +1,130 @@
+---
+title: "Experiment_with_data"
+author: "Saurabh Gupta"
+date: "June 12, 2017"
+output: pdf_document
+---
+
+## Problem statement
+
+In this problem, we have to classify the "Income.Group" based on the predictors. We use rpart classifiers to classify the dataset.
+
+### Load the library
+
+```{r}
+suppressMessages(library(caret))
+suppressMessages(library(doParallel))
+suppressMessages(library(Hmisc))
+library(data.table)
+
+```
+
+### Data loading and exploration
+
+We load the data from given urls. Our goal is to predict the Income.Group for testData and we prepare our model on Vehicle dataset.
+
+```{r}
+cl <- makeCluster(detectCores())
+registerDoParallel(cl)
+
+#fileUrlTrain <- "https://datahack-prod.s3.ap-south-1.amazonaws.com/workshop_train_file/train_gbW7HTd.csv"
+#download.file(fileUrlTrain,destfile = "./fileTrain.csv")
+Vehicle <- read.csv("fileTrain.csv",header=T,na.strings = "")
+
+#fileUrlTest <- "https://datahack-prod.s3.ap-south-1.amazonaws.com/workshop_test_file/test_2AFBew7.csv"
+#download.file(fileUrlTest,destfile = "./fileTest.csv")
+testData <- read.csv("fileTest.csv",header = T,na.strings = "")
+
+```
+
+### Data Cleaning
+
+We convert the Income.Group value ( if it is "<=50K" it gives X0 otherwise it gives X1)
+
+```{r}
+names(Vehicle) <- gsub("[.]","_",names(Vehicle))
+names(testData) <- gsub("[.]","_",names(testData))
+Vehicle$Income_Group <- factor(ifelse(Vehicle$Income_Group=="<=50K",0,1))
+Vehicle$Income_Group <- make.names(Vehicle$Income_Group)
+Vehicle$Income_Group <- factor(Vehicle$Income_Group)
+```
+
+### Data Visualization
+
+Classes in the response variable is unbalanced. Hence sampling is need to get the  good accuracy.
+
+```{r}
+str(Vehicle)
+table(Vehicle$Income_Group)  
+prop.table(table(Vehicle$Income_Group))
+```
+
+### Missing value detection and treatment
+
+We replaced missing value to the value which occurs frequently in that predictor
+
+```{r}
+colSums(is.na(Vehicle))
+Vehicle$Workclass <- impute(Vehicle$Workclass,mode)
+Vehicle$Occupation <- impute(Vehicle$Occupation,mode)
+Vehicle$Native_Country <- impute(Vehicle$Native_Country,mode)
+```
+
+
+### Create train and test data
+```{r}
+index <- createDataPartition(Vehicle$Income_Group,p=0.7,list=FALSE)
+training <- Vehicle[index,]
+testing <- Vehicle[-index,]
+```
+
+
+### Model Building
+
+```{r}
+ctrl <- trainControl(method="repeatedcv",
+                     repeats = 10,
+                     classProbs = T,
+                     sampling = "up",
+                     allowParallel = TRUE,
+                     summaryFunction = twoClassSummary
+)
+
+rpart_mod <- train(Income_Group ~ .,
+                   data=training,
+                   method="rpart",
+                   trControl=ctrl,
+                   tuneLength=30,
+                   metric="ROC",
+                   na.action = na.omit
+)
+
+
+```
+
+
+### Prediction for training data
+
+```{r}
+predicted <- predict(rpart_mod,testing)
+caret::confusionMatrix(predicted,testing$Income_Group)
+```
+
+
+### ROC 
+
+```{r}
+suppressMessages(library(ROSE))
+roc.curve(testing$Income_Group,predicted)
+```
+
+### Prediction for testData
+
+```{r}
+# predicted <- ifelse(predicted == "X0","<=50K",">50K")
+# df <- data.frame(ID = testData$ID,Income.Group=predicted)
+# write.csv(df,file = "final_solutions.csv")
+```
+
+
+
