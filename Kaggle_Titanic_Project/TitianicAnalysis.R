@@ -495,7 +495,7 @@ library(rpart.plot)
 
 # Create utility function
 rpart.cv <- function(seed, training, labels, ctrl) {
-  cl <- makeCluster(6, type = "SOCK")
+  cl <- makeCluster(3, type = "SOCK")
   registerDoSNOW(cl)
   
   set.seed(seed)
