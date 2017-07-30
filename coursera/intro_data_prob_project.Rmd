@@ -1,0 +1,236 @@
+---
+title: "Exploring the BRFSS data"
+output: 
+  html_document: 
+    fig_height: 4
+    highlight: pygments
+    theme: spacelab
+---
+
+### Load packages
+
+```{r load-packages, message = FALSE}
+library(ggplot2)
+library(dplyr)
+```
+
+### Load data
+
+```{r load-data}
+load("brfss2013.RData")
+```
+
+
+## Description of data
+
+The Behavioral Risk Factor Surveillance System (BRFSS) is a collaborative project between all of the states in the United States (US) and participating US territories and the Centers for Disease Control and Prevention (CDC). The BRFSS is administered and supported by CDC's Population Health Surveillance Branch, under the Division of Population Health at the National Center for Chronic Disease Prevention and Health Promotion. BRFSS is an ongoing surveillance system designed to measure behavioral risk factors for the non-institutionalized adult population (18 years of age and older) residing in the US. The BRFSS was initiated in 1984, with 15 states collecting surveillance data on risk behaviors through monthly telephone interviews. Over time, the number of states participating in the survey increased; by 2001, 50 states, the District of Columbia, Puerto Rico, Guam, and the US Virgin Islands were participating in the BRFSS. Today, all 50 states, the District of Columbia, Puerto Rico, and Guam collect data annually and American Samoa, Federated States of Micronesia, and Palau collect survey data over a limited point- in-time (usually one to three months).
+
+The BRFSS objective is to collect uniform, state-specific data on preventive health practices and risk behaviors that are linked to chronic diseases, injuries, and preventable infectious diseases that affect the adult population. Factors assessed by the BRFSS in 2013 include tobacco use, HIV/AIDS knowledge and prevention, exercise, immunization, health status, healthy days - health-related quality of life, health care access, inadequate sleep, hypertension awareness, cholesterol awareness, chronic health conditions, alcohol consumption, fruits and vegetables consumption, arthritis burden, and seatbelt use. Since 2011, BRFSS conducts both landline telephone- and cellular telephone-based surveys. In conducting the BRFSS landline telephone survey, interviewers collect data from a randomly selected adult in a household. In conducting the cellular telephone version of the BRFSS questionnaire, interviewers collect data from an adult who participates by using a cellular telephone and resides in a private residence or college housing.
+
+
+## Research questions
+
+1. How is the health status of people based on their states ?
+
+2. Which state has Poor and Fair health status people beacause it is most likely that same conditions may also     affect the other states too ?
+
+3. Find out the reason why people have poor and fair health? What conditions are responsible for this and also     examine the  type of disease they have if any ?
+
+
+## Exploratory data analysis
+
+## 1. What's the health status of people based on their states ?
+
+If the number of people in the paricular state have not good helath status then this is most likely others people in that state will become unhealthy. So we examine the health status of people based on their state.
+
+First we will explore general health of people within the states from the population
+
+```{r}
+brfss2013 %>% 
+  select(X_state,genhlth) %>% 
+  str()
+```
+
+As we can seeen from above analysis both(states and general health) are factor variable lets analyze the dataset
+
+```{r}
+brfss2013 %>% 
+  select(X_state,genhlth) %>% 
+  group_by(X_state,genhlth) %>% 
+  filter(!is.na(genhlth) & !is.na(X_state)) %>% 
+  summarise(count=n())
+```
+
+If any paricular state has high number of Fair and Poor health status of people then in future this will become the serios problem because it is most likely others people in that state will have same type of deasease.
+
+## 2. Which state has higher number of people who has  Poor and Fair health status beacause it is most likely that same conditions may also affect the other states too ?
+
+Add new variable "diseaseDuration" that shows the number of days people have disease( physical health,mental health,poor health )
+
+```{r}
+brfss2013 %>% 
+  select(X_state,genhlth,physhlth,menthlth,poorhlth) %>% 
+  mutate(diseaseDuration = physhlth + menthlth + poorhlth) %>% 
+  filter(genhlth %in% c("Poor","Fair")) %>% 
+  group_by(X_state,genhlth) %>% 
+  summarise(count=n()) %>% 
+  arrange(desc(count))
+```
+
+As we can seeen in the state "FLorida" highest number of people are not having good health status. Lets explore more what are the factors are responsible for this.
+
+
+```{r}
+floridaSample <- brfss2013 %>% 
+  filter(X_state %in% c("Florida"),genhlth %in% c("Poor","Fair")) %>% 
+  select(-c(2:18,20:22)) 
+
+#View(floridaSample)
+
+table(as.factor(floridaSample$sleptim1))
+```
+
+sleptim1 variable represents the amount of sleep people take. It is possible, people slept for 24 hours which is also most unlikly but 450 and 103 represents the invalid data entry. Similary we have 0 value which is also most unlikly i.e. people never slept. Hence remove these values from the analysis. Major portation of people from Florida takes the sleep between 5-10 hours. As we see this is not majorly affect the health.
+
+
+### Visualize the distribution of poor and fair status people in florida
+
+```{r}
+ggplot(floridaSample,aes(x=genhlth))+geom_bar()
+```
+
+
+### Health status vs Health packages
+
+```{r}
+# Mostly people takes the health coverage package
+table(floridaSample$hlthpln1) 
+
+ggplot(floridaSample,aes(x=genhlth,fill=hlthpln1))+geom_bar()
+
+```
+
+You can simpliy ignore the NA term beacuase it has no effect at the Helath status in Health packages
+
+
+### Health status vs Medical cost
+
+```{r}
+# 72 % of florida prople who has health status Poor or Fair says that cost is not an issue.
+prop.table(table(floridaSample$medcost))
+
+ggplot(floridaSample,aes(x=genhlth,fill=medcost))+geom_bar()
+
+```
+
+
+### Health status vs Health consious
+
+```{r}
+
+# 78 % people are health consious 
+prop.table(table(floridaSample$checkup1))
+
+ggplot(floridaSample,aes(x=genhlth,fill=checkup1))+geom_bar()
+```
+
+You can see from  the above analysis mostly population of done his/her healthy check up last year.
+
+### Healthy status vs BP
+
+```{r}
+# 65% people are affect by bp in florida who has health issues
+prop.table(table(floridaSample$bphigh4))
+
+
+```
+
+
+### Health status vs BP Medice
+
+```{r}
+
+# 87% people are taking the bp medicine 
+prop.table(table(floridaSample$bpmeds))
+
+ggplot(floridaSample,aes(x=genhlth,fill= bpmeds))+geom_bar()
+```
+
+
+### Health status vs Smoking
+
+```{r}
+
+# 60 % of people smoke at least 100 cigrets
+prop.table(table(floridaSample$smoke100))
+
+ggplot(floridaSample,aes(x=genhlth,fill= smoke100))+geom_bar()
+```
+
+
+### Health status vs HIV
+
+```{r}
+# 36% people are affected by HIV
+prop.table(table(floridaSample$hivtst6))
+
+
+ggplot(floridaSample,aes(x=genhlth,fill= hivtst6))+geom_bar()
+```
+
+It can be seen from the above analysis 65% people has bp problem , 60% of people has smoking habit and 36% people are suffering from HIV in florida.
+
+## 3. Explore our analysis to other states as well and try to find out the reasons for good and poor health ?
+
+```{r}
+subsample <- brfss2013 %>% 
+ select(-c(2:18,20:22)) 
+
+```
+
+### Health status vs BLood sugar
+
+```{r}
+ggplot(subsample,aes(x=genhlth))+geom_bar()
+```
+
+As we can seen many people from population has good health but there is small number of people who has bad health comes mostly from "Florida" state as we discussed in above analaysis.
+
+
+```{r}
+subsample %>% 
+  filter(genhlth %in% c("Poor","Fair")) %>% 
+  group_by(genhlth,bldsugar) %>% 
+  summarise(count=n())
+
+ggplot(subsample,aes(x=bldsugar,fill=genhlth))+geom_bar(binwidth = 50)
+```
+
+We can seen majority of fair and poor health status people have blood sugar around 100. 
+
+### Health status vs BLood sugar vs ashthama age
+
+```{r}
+ggplot(subsample,aes(x=asthmage,y = bldsugar,col=genhlth))+geom_point(size = 3)
+```
+
+```{r}
+ggplot(subsample,aes(x=hadmam,fill=genhlth))+geom_bar()
+```
+
+It contains very high unknown values. Hence can not give any inferences.
+
+
+###  Inferences
+
+- Majority of poor and fair health status prople resides in "Florida" states
+- Majority of people has very good health status.
+- Poor and fair status people has diseases like BP,HIV,sugar etc.
+- Majority of population have enough money for the treatment.
+- Majority of population have medicare plans.
+- Majority of good health people also comes from "Florida" states.
+
+
+
+
+
