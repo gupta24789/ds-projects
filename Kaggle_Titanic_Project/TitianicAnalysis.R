@@ -491,7 +491,6 @@ rf.5.cv.3
 library(rpart)
 library(rpart.plot)
 
-# Per video #5, let's use 3-fold CV repeated 10 times 
 
 # Create utility function
 rpart.cv <- function(seed, training, labels, ctrl) {
