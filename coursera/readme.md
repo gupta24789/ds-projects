@@ -9,7 +9,7 @@ This repository is aimed to help Coursera learners who have difficulties in thei
 
 ![3. Applied Plotting, Charting and Data Representation in Python(Course-2)]()
 
-![4. Applied Machine Learning in Python(Course-3)]()
+![4. Applied Machine Learning in Python(Course-3)](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-3_Fundamentals_of_Machine_Learning_in_Python)
 
 ![5. Applied Text Minning in Python(Course-4)]()
 
