@@ -7,7 +7,7 @@ This repository is aimed to help Coursera learners who have difficulties in thei
 
 ![2. Introduction to Data Science in Python(Course-1)](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-1_intro_to_data%20science_in_python)
 
-![3. Applied Plotting, Charting and Data Representation in Python(Course-2)]()
+![3. Applied Plotting, Charting and Data Representation in Python(Course-2)](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-2_Applied_Plotting_Charting_And_Data_Representation_in_Python)
 
 ![4. Applied Machine Learning in Python(Course-3)](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-3_Fundamentals_of_Machine_Learning_in_Python)
 
