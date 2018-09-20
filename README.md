@@ -2,7 +2,7 @@
 
 #### Below is the list of data science projects that is implemented either in R or Python
 
-![1. BigMart Sales Problem in Python ](https://github.com/gupta24789/Data_Science_Projects/tree/master/AV_BigMartSale_IN_Python)
+[1. BigMart Sales Problem in Python ](https://github.com/gupta24789/Data_Science_Projects/tree/master/AV_BigMartSale_IN_Python)
 
 ![2. BigMart Sales Problem in R](https://github.com/gupta24789/Data_Science_Projects/tree/master/AV_Big_Mart_Sales_III)
 
