@@ -13,7 +13,7 @@ This repository is aimed to help Coursera learners who have difficulties in thei
 
 [5. Applied Text Minning in Python(Course-4)]()
 
-[6. Course-1_Neural_Networks_Deep_Learning(dl.ai)]()
+[6. Course-1_Neural_Networks_Deep_Learning(deeplearning.ai(dl.ai))]()
 
 
 
