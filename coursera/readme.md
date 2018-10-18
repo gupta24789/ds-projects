@@ -13,5 +13,4 @@ This repository is aimed to help Coursera learners who have difficulties in thei
 
 [5. Applied Text Minning in Python(Course-4)]()
 
-[6. Applied Social Network Analysis in Python(Course-5)]()
 
