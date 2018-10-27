@@ -15,6 +15,8 @@ This repository is aimed to help Coursera learners who have difficulties in thei
 
 [6. Course-1_Neural_Networks_Deep_Learning(deeplearning.ai(dl.ai))]()
 
+[7. Course-2_Improving_Deep_Neural_Networks(deeplearning.ai(dl.ai))]()
+
 
 
 
