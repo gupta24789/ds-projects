@@ -12,7 +12,7 @@ This repository is aimed to help Coursera learners who have difficulties in thei
   - [Introduction to Data Science in Python](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-1_intro_to_data%20science_in_python)
   - [Applied Plotting, Charting and Data Representation in Python](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-2_Applied_Plotting_Charting_And_Data_Representation_in_Python)
   - [Applied Machine Learning in Python](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-3_Fundamentals_of_Machine_Learning_in_Python)
-  - [Applied Text Minning in Python]()
+  - [Applied Text Minning in Python](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-4_Applied_Text_Mining_in_%20Python)
   
 - Andrew Ng [deeplearning.ai]
   - [Neural_Networks_Deep_Learning](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-1_Neural_Networks_Deep_Learning(dl.ai))
@@ -22,6 +22,10 @@ This repository is aimed to help Coursera learners who have difficulties in thei
   - [Sequence Models](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-5_Sequence_Models(deeplearning.ai))
   
 - National Research University Higher School of Economics
-  -[Introduction to Deep Learning]()
-  -[How to Win a Data Science Competition: Learn from Top Kagglers]()
-  -[Bayesian Methods for Machine Learning]()
+  - [Introduction to Deep Learning]
+  - [How to Win a Data Science Competition: Learn from Top Kagglers]
+  - [Bayesian Methods for Machine Learning]
+  - [Practical Reinforcement Learning]
+  - [Deep Learning in Computer Vision]
+  - [Natural Language Processing]
+  - [Addressing Large Hadron Collider Challenges by Machine Learning]
