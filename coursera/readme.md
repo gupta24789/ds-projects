@@ -15,13 +15,13 @@ This repository is aimed to help Coursera learners who have difficulties in thei
   - [Applied Text Minning in Python]()
   
 - Andrew Ng [deeplearning.ai]
-  - [Neural_Networks_Deep_Learning]()
-  - [Improving_Deep_Neural_Networks]()
-  - [Structuring Deep learning Projects]()
-  - [Convolutional Neural Network]()
-  - [Sequence Models]()
+  - [Neural_Networks_Deep_Learning](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-1_Neural_Networks_Deep_Learning(dl.ai))
+  - [Improving_Deep_Neural_Networks](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-2_Improving_Deep_Neural_Networks(dl.ai))
+  - [Structuring Deep learning Projects](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-3_Structuring_Machine_Learning_Projects(dl.ai))
+  - [Convolutional Neural Network](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-4_Convolutional_Neural_Network(dl.ai))
+  - [Sequence Models](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-5_Sequence_Models(deeplearning.ai))
   
-  - National Research University Higher School of Economics
-    -[Introduction to Deep Learning]()
-    -[How to Win a Data Science Competition: Learn from Top Kagglers]()
-    -[Bayesian Methods for Machine Learning]()
+- National Research University Higher School of Economics
+  -[Introduction to Deep Learning]()
+  -[How to Win a Data Science Competition: Learn from Top Kagglers]()
+  -[Bayesian Methods for Machine Learning]()
