@@ -22,7 +22,7 @@ This repository is aimed to help Coursera learners who have difficulties in thei
   - [Sequence Models](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course-5_Sequence_Models(deeplearning.ai))
   
 - National Research University Higher School of Economics
-  - [Introduction to Deep Learning]
+  - [Introduction to Deep Learning](https://github.com/gupta24789/Data_Science_Projects/tree/master/coursera/Course_1_introduction_to_deep_learning)
   - [How to Win a Data Science Competition: Learn from Top Kagglers]
   - [Bayesian Methods for Machine Learning]
   - [Practical Reinforcement Learning]
