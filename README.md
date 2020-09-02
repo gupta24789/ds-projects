@@ -1,6 +1,10 @@
 # Data Science Projects
 
-#### Below is the list of data science projects that is implemented either in R or Python
+    This repository contains the data science related projects. 
+    Some of projects belong to Online competition and some of work related to certification.
+    
+
+
 
 [1. BigMart Sales Problem in Python ](https://github.com/gupta24789/Data_Science_Projects/tree/master/AV_BigMartSale_IN_Python)
 
@@ -19,5 +23,3 @@
 [8. Identify the digits using keras](https://github.com/gupta24789/Data_Science_Projects/tree/master/AV_Identify_the_Digits)
 
 [9. NLP Projects]()
-
-    - [9.1 Word Embedding ()]
