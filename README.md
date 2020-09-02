@@ -20,4 +20,4 @@
 
 [9. NLP Projects]()
 
-    [9.1 Word Embedding ()]
+    - [9.1 Word Embedding ()]
