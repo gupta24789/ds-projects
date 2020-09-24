@@ -23,3 +23,8 @@
 [8. Identify the digits using keras](https://github.com/gupta24789/Data_Science_Projects/tree/master/AV_Identify_the_Digits)
 
 [9. NLP Projects](https://github.com/gupta24789/ds_projects/tree/master/nlp)
+- train word embeddings using word2vec, glove and fasttext
+- sentiment_analysis
+- auto_correct
+- machine translation
+  
