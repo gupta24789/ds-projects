@@ -1,1 +1,0 @@
-Machine Learning and Deep Learning Projects developed using google colab
